@@ -1,7 +1,7 @@
 @echo off
 
-rem set Target=Windows
-set Target=WASM
+set Target=Windows
+rem set Target=WASM
 
 set ConvertToWat=1
 
@@ -28,7 +28,7 @@ echo [Compiling Windows DLL]
 
 set CompilerFlags=/GS- /W3 /Zc:wchar_t /WX- /Zc:forScope /Zi /Gm- /Od /Gd /MDd /FC /Zc:inline /fp:precise /nologo /diagnostics:column /errorReport:prompt
 set CompilerFlags=%CompilerFlags% /D "WIN32" /D "_CRT_NONSTDC_NO_DEPRECATE" /D "_CRT_SECURE_NO_DEPRECATE" /D "_CRT_NONSTDC_NO_WARNINGS" /D "ZLIB_WINAPI" /D "WIN64" /D "_WINDLL"
-set CompilerFlags=%CompilerFlags% /I"..\..\.."
+set CompilerFlags=%CompilerFlags% /I"%RootDir%"
 rem set CompilerFlags=%CompilerFlags% /ifcOutput "Temp\" /Fa"Temp\" /Fo"Temp\" /Fp"Temp\zlibvc.pch"
 set LinkerFlags=/MACHINE:X64 /NOLOGO /OUT:"zlib.lib"
 
@@ -37,10 +37,10 @@ cl %CompilerFlags% /c /Fo"adler32.obj" "%RootDir%\adler32.c" & set ObjectFiles=%
 cl %CompilerFlags% /c /Fo"compress.obj" "%RootDir%\compress.c" & set ObjectFiles=%ObjectFiles% "compress.obj"
 cl %CompilerFlags% /c /Fo"crc32.obj" "%RootDir%\crc32.c" & set ObjectFiles=%ObjectFiles% "crc32.obj"
 cl %CompilerFlags% /c /Fo"deflate.obj" "%RootDir%\deflate.c" & set ObjectFiles=%ObjectFiles% "deflate.obj"
-rem cl %CompilerFlags% /c /Fo"gzclose.obj" "%RootDir%\gzclose.c" & set ObjectFiles=%ObjectFiles% "gzclose.obj"
-rem cl %CompilerFlags% /c /Fo"gzlib.obj" "%RootDir%\gzlib.c" & set ObjectFiles=%ObjectFiles% "gzlib.obj"
-rem cl %CompilerFlags% /c /Fo"gzread.obj" "%RootDir%\gzread.c" & set ObjectFiles=%ObjectFiles% "gzread.obj"
-rem cl %CompilerFlags% /c /Fo"gzwrite.obj" "%RootDir%\gzwrite.c" & set ObjectFiles=%ObjectFiles% "gzwrite.obj"
+cl %CompilerFlags% /c /Fo"gzclose.obj" "%RootDir%\gzclose.c" & set ObjectFiles=%ObjectFiles% "gzclose.obj"
+cl %CompilerFlags% /c /Fo"gzlib.obj" "%RootDir%\gzlib.c" & set ObjectFiles=%ObjectFiles% "gzlib.obj"
+cl %CompilerFlags% /c /Fo"gzread.obj" "%RootDir%\gzread.c" & set ObjectFiles=%ObjectFiles% "gzread.obj"
+cl %CompilerFlags% /c /Fo"gzwrite.obj" "%RootDir%\gzwrite.c" & set ObjectFiles=%ObjectFiles% "gzwrite.obj"
 cl %CompilerFlags% /c /Fo"infback.obj" "%RootDir%\infback.c" & set ObjectFiles=%ObjectFiles% "infback.obj"
 cl %CompilerFlags% /c /Fo"inffast.obj" "%RootDir%\inffast.c" & set ObjectFiles=%ObjectFiles% "inffast.obj"
 cl %CompilerFlags% /c /Fo"inflate.obj" "%RootDir%\inflate.c" & set ObjectFiles=%ObjectFiles% "inflate.obj"
@@ -48,10 +48,10 @@ cl %CompilerFlags% /c /Fo"inftrees.obj" "%RootDir%\inftrees.c" & set ObjectFiles
 cl %CompilerFlags% /c /Fo"trees.obj" "%RootDir%\trees.c" & set ObjectFiles=%ObjectFiles% "trees.obj"
 cl %CompilerFlags% /c /Fo"uncompr.obj" "%RootDir%\uncompr.c" & set ObjectFiles=%ObjectFiles% "uncompr.obj"
 cl %CompilerFlags% /c /Fo"zutil.obj" "%RootDir%\zutil.c" & set ObjectFiles=%ObjectFiles% "zutil.obj"
-rem cl %CompilerFlags% /c /Fo"ioapi.obj" "%RootDir%\contrib\minizip\ioapi.c" & set ObjectFiles=%ObjectFiles% "ioapi.obj"
-rem cl %CompilerFlags% /c /Fo"iowin32.obj" "%RootDir%\contrib\minizip\iowin32.c" & set ObjectFiles=%ObjectFiles% "iowin32.obj"
-rem cl %CompilerFlags% /c /Fo"unzip.obj" "%RootDir%\contrib\minizip\unzip.c" & set ObjectFiles=%ObjectFiles% "unzip.obj"
-rem cl %CompilerFlags% /c /Fo"zip.obj" "%RootDir%\contrib\minizip\zip.c" & set ObjectFiles=%ObjectFiles% "zip.obj"
+cl %CompilerFlags% /c /Fo"ioapi.obj" "%RootDir%\contrib\minizip\ioapi.c" & set ObjectFiles=%ObjectFiles% "ioapi.obj"
+cl %CompilerFlags% /c /Fo"iowin32.obj" "%RootDir%\contrib\minizip\iowin32.c" & set ObjectFiles=%ObjectFiles% "iowin32.obj"
+cl %CompilerFlags% /c /Fo"unzip.obj" "%RootDir%\contrib\minizip\unzip.c" & set ObjectFiles=%ObjectFiles% "unzip.obj"
+cl %CompilerFlags% /c /Fo"zip.obj" "%RootDir%\contrib\minizip\zip.c" & set ObjectFiles=%ObjectFiles% "zip.obj"
 LINK /lib %LinkerFlags% %ObjectFiles%
 
 goto END

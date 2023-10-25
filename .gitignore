@@ -4,3 +4,4 @@
 *.pdb
 *.wat
 *.wasm
+*.exe
