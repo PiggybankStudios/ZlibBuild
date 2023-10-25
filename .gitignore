@@ -1,2 +1,6 @@
-build/*
-!build/build.bat
+*.o
+*.obj
+*.lib
+*.pdb
+*.wat
+*.wasm
